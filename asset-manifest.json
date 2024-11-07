@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Ymishkhas/Quiz-app/static/css/main.5130ce17.css",
-    "main.js": "/Ymishkhas/Quiz-app/static/js/main.e764db37.js",
-    "static/js/453.fc01f49c.chunk.js": "/Ymishkhas/Quiz-app/static/js/453.fc01f49c.chunk.js",
-    "index.html": "/Ymishkhas/Quiz-app/index.html",
-    "main.5130ce17.css.map": "/Ymishkhas/Quiz-app/static/css/main.5130ce17.css.map",
-    "main.e764db37.js.map": "/Ymishkhas/Quiz-app/static/js/main.e764db37.js.map",
-    "453.fc01f49c.chunk.js.map": "/Ymishkhas/Quiz-app/static/js/453.fc01f49c.chunk.js.map"
+    "main.css": "/Quiz-app/static/css/main.5130ce17.css",
+    "main.js": "/Quiz-app/static/js/main.c3b3ab0b.js",
+    "static/js/453.fc01f49c.chunk.js": "/Quiz-app/static/js/453.fc01f49c.chunk.js",
+    "index.html": "/Quiz-app/index.html",
+    "main.5130ce17.css.map": "/Quiz-app/static/css/main.5130ce17.css.map",
+    "main.c3b3ab0b.js.map": "/Quiz-app/static/js/main.c3b3ab0b.js.map",
+    "453.fc01f49c.chunk.js.map": "/Quiz-app/static/js/453.fc01f49c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.5130ce17.css",
-    "static/js/main.e764db37.js"
+    "static/js/main.c3b3ab0b.js"
   ]
 }
