@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Question from './Question';
 import Result from './Result';
-import Progressbar from './Progressbar';
+import Header from './Header';
 import './Quiz.css';
 
 const questions = [
@@ -67,15 +67,54 @@ function Quiz() {
     const [score, setScore] = useState(0);
     const [progress, setProgress] = useState(0);
 
+    const [minutes, setMinutes] = useState(2);
+    const [seconds, setSeconds] = useState(0);
+
     const handleAnswerOptionClick = (questionIndex, isCorrect) => {
         const newAnswers = [...answers];
         newAnswers[questionIndex] = isCorrect;
         setAnswers(newAnswers);
-        
+
         // Set progress percentage
-        const percentage = parseInt(newAnswers.filter(ans => ans!=null).length / questions.length * 100)
+        const percentage = parseInt(newAnswers.filter(ans => ans != null).length / questions.length * 100)
         setProgress(percentage)
     };
+
+    // Set the time we are count down to - 2 min
+    const countDownDate = new Date();
+    const currentMin = countDownDate.getMinutes();
+    countDownDate.setMinutes(currentMin + 2);
+
+    // Update the count down every 1 second
+    useEffect(() => {
+        const interval = setInterval(() => {
+
+            // if the timer is not finished but user submitted, stop the timer
+            if (showResult) {
+                clearInterval(interval);
+                return;
+            }
+
+            // Get now date
+            let now = new Date().getTime();
+
+            // Find the distance between now and the count down date
+            const distance = countDownDate - now;
+
+            // Update the minutes and seconds based on the time calculations 
+            setMinutes(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
+            setSeconds(Math.floor((distance % (1000 * 60)) / 1000));
+
+            // if the count down is over, close the quiz
+            if (distance < 0) {
+                clearInterval(interval)
+                handleSubmit();
+            }
+
+        }, 1000);
+
+        return () => clearInterval(interval);
+    }, [showResult, answers]) // dependency so the useEffect reruns when it changes
 
     const handleSubmit = () => {
         const newScore = answers.filter((answer) => answer === true).length;
@@ -89,7 +128,7 @@ function Quiz() {
                 <Result score={score} totalQuestions={questions.length} />
             ) : (
                 <div>
-                    <Progressbar progress={progress}/>
+                    <Header minutes={minutes} seconds={seconds} progress={progress} />
                     {questions.map((question, index) => (
                         <Question
                             key={index}
