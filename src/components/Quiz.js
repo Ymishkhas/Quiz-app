@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Question from './Question';
 import Result from './Result';
+import Progressbar from './Progressbar';
 import './Quiz.css';
 
 const questions = [
@@ -64,11 +65,16 @@ function Quiz() {
     const [answers, setAnswers] = useState(Array(questions.length).fill(null));
     const [showResult, setShowResult] = useState(false);
     const [score, setScore] = useState(0);
+    const [progress, setProgress] = useState(0);
 
     const handleAnswerOptionClick = (questionIndex, isCorrect) => {
         const newAnswers = [...answers];
         newAnswers[questionIndex] = isCorrect;
         setAnswers(newAnswers);
+        
+        // Set progress percentage
+        const percentage = parseInt(newAnswers.filter(ans => ans!=null).length / questions.length * 100)
+        setProgress(percentage)
     };
 
     const handleSubmit = () => {
@@ -83,6 +89,7 @@ function Quiz() {
                 <Result score={score} totalQuestions={questions.length} />
             ) : (
                 <div>
+                    <Progressbar progress={progress}/>
                     {questions.map((question, index) => (
                         <Question
                             key={index}
